@@ -14,7 +14,7 @@ const DoctorsSchema = new Schema({
 		type: String,
 		required: false,
 		unique: true,
-		lowercase: true
+		lowercase: false
 	},
 	specialisation: {
 		type: String,
