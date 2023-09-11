@@ -44,6 +44,9 @@ export default {
 			if(!user.isDoctor){
 				await new context.di.model.Patients({ uuid: user.uuid }).save();
 			}
+			if(user.isDoctor){
+				await new context.di.model.Doctors({ uuid: user.uuid }).save();
+			}
 
 			return {
 				token: context.di.jwt.createAuthToken(user.email, user.isAdmin, user.isActive, user.uuid)
