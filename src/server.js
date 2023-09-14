@@ -22,24 +22,24 @@ import routesManager from './routes/routesManager.js';
 
 mongoose.set('strictQuery', true);
 
-const uri = process.env.MONGODB_URI
-const main = async () => {
-  await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-};
+// const uri = process.env.MONGODB_URI
+// const main = async () => {
+//   await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+// };
 
-main()
-  .then(console.log('🎉 connected to database successfully'))
-  .catch(error => console.error(error));
+// main()
+//   .then(console.log('🎉 connected to database successfully'))
+//   .catch(error => console.error(error));
 
-// if (environmentVariablesConfig.formatConnection === 'DNSseedlist' && environmentVariablesConfig.mongoDNSseedlist !== '') {
-// 	mongoose.connect(environmentVariablesConfig.mongoDNSseedlist);
-// } else {
-// 	if (environmentVariablesConfig.mongoUser !== '' && environmentVariablesConfig.mongoPass !== '') {
-// 		mongoose.connect(`mongodb://${environmentVariablesConfig.mongoUser}:${environmentVariablesConfig.mongoPass}@${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
-// 	} else {
-// 		mongoose.connect(`mongodb://${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
-// 	}
-// }
+if (environmentVariablesConfig.formatConnection === 'DNSseedlist' && environmentVariablesConfig.mongoDNSseedlist !== '') {
+	mongoose.connect(environmentVariablesConfig.mongoDNSseedlist);
+} else {
+	if (environmentVariablesConfig.mongoUser !== '' && environmentVariablesConfig.mongoPass !== '') {
+		mongoose.connect(`mongodb://${environmentVariablesConfig.mongoUser}:${environmentVariablesConfig.mongoPass}@${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
+	} else {
+		mongoose.connect(`mongodb://${environmentVariablesConfig.dbHost}:${environmentVariablesConfig.dbPort}/${environmentVariablesConfig.database}`);
+	}
+}
 
 const db = mongoose.connection;
 db.on('error', (err) => {

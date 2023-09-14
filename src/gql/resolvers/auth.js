@@ -14,12 +14,14 @@ export default {
 		/**
 		 * It allows to users to register as long as the limit of allowed users has not been reached
 		 */
-		registerUser: async (parent, { email, password, isDoctor }, context) => {
+		registerUser: async (parent, { email, phone, password, isDoctor }, context) => {
 			if (!email || !password) {
-				throw new UserInputError('Data provided is not valid');
+				if (!phone || !password){
+					throw new UserInputError('Data provided is not valid');
+				}
 			}
 
-			if (!isValidEmail(email)) {
+			if (email && !isValidEmail(email)) {
 				throw new UserInputError('The email is not valid');
 			}
 
@@ -31,15 +33,37 @@ export default {
 
 			context.di.authValidation.ensureLimitOfUsersIsNotReached(registeredUsersCount);
 
-			const isAnEmailAlreadyRegistered = await context.di.model.Users.findOne({ email }).lean();
+			let isAnEmailAlreadyRegistered = null;
+			if(email){
+				isAnEmailAlreadyRegistered = await context.di.model.Users.findOne({ email }).lean();
+			}
+			let isAnPhoneAlreadyRegistered = null;
+			if(phone){
+				isAnEmailAlreadyRegistered = await context.di.model.Users.findOne({ phone }).lean();
+			}
 
 			if (isAnEmailAlreadyRegistered) {
 				throw new UserInputError('Data provided is not valid');
 			}
+			if (isAnPhoneAlreadyRegistered) {
+				throw new UserInputError('Data provided is not valid');
+			}
 
-			await new context.di.model.Users({ email, password, isDoctor }).save();
+			if (email){
+				await new context.di.model.Users({ email, password, isDoctor }).save();
+			}
+			if (phone){
+				await new context.di.model.Users({ phone, password, isDoctor }).save();
+			}
 
-			const user = await context.di.model.Users.findOne({ email }).lean();
+			let user = null;
+
+			if(email){
+				user = await context.di.model.Users.findOne({ email }).lean();
+			}
+			if(phone){
+				user = await context.di.model.Users.findOne({ phone }).lean();
+			}
 			
 			if(!user.isDoctor){
 				await new context.di.model.Patients({ uuid: user.uuid }).save();
@@ -55,12 +79,20 @@ export default {
 		/**
 		 * It allows users to authenticate. Users with property isActive with value false are not allowed to authenticate. When an user authenticates the value of lastLogin will be updated
 		 */
-		authUser: async (parent, { email, password }, context) => {
+		authUser: async (parent, { email, password, phone }, context) => {
 			if (!email || !password) {
-				throw new UserInputError('Invalid credentials');
+				if(!phone || !password){
+					throw new UserInputError('Invalid credentials');
+				}
 			}
 
-			const user = await context.di.model.Users.findOne({ email, isActive: true }).lean();
+			let user = null
+			if(email){
+				user = await context.di.model.Users.findOne({ email, isActive: true }).lean();
+			}
+			if(phone){
+				user = await context.di.model.Users.findOne({ phone, isActive: true }).lean();
+			}
 
 			if (!user) {
 				throw new UserInputError('User not found or login not allowed');
