@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-backend-node-graphql-mongodb",
+  "name": "SmileDom",
   "version": "2.0.3",
-  "description": "boilerplate-backend-node-graphql-mongodb",
+  "description": "smiledom",
   "main": "src/server.js",
   "type": "module",
   "scripts": {
@@ -16,14 +16,13 @@
     "build": "babel src -d dist"
   },
   "keywords": [
-    "boilerplate",
+    "smiledom",
     "GraphQL",
     "Apollo",
     "Node.js",
     "MongoDB",
     "server"
   ],
-  "author": "Dídac García (https://didaquis.github.io/)",
   "license": "MIT",
   "devDependencies": {
     "@didaquis/eslint-plugin-no-lenght": "1.1.2",

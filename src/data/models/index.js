@@ -4,7 +4,8 @@ import {
 	DoctorsSchema, 
 	PatientsSchema, 
 	UsersSchema,
-	MedicalHistorySchema
+	MedicalHistorySchema,
+	MessagesSchema
 } from './schemas/index.js';
 
 export const models = {
@@ -12,4 +13,5 @@ export const models = {
 	Patients: mongoose.model('patients', PatientsSchema),
 	Doctors: mongoose.model('doctors', DoctorsSchema),
 	MedicalHistory: mongoose.model('medicalHistory', MedicalHistorySchema),
+	Messages: mongoose.model('messages', MessagesSchema),
 };

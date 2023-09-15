@@ -4,12 +4,14 @@ import users from './users.js';
 import auth from './auth.js';
 import patients from './patients.js';
 import doctors from './doctors.js';
-import history from '../types/history.js';
+import history from './history.js';
+import messages from './messages.js';
 
 export const resolvers = merge(
 	users,
 	auth,
 	patients,
 	doctors,
-	history
+	history,
+	messages
 );
