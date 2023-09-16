@@ -21,7 +21,7 @@ export default {
             const user = await context.di.authValidation.getUser(context);
 
 			const sortCriteria = { suid: user.uuid };
-			return context.di.model.Messages.find(sortCriteria).lean();
+			return context.di.model.Messages.find({sortCriteria}).lean();
 		}
 	},
 	Mutation: {

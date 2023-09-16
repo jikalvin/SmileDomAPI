@@ -41,6 +41,8 @@ if (environmentVariablesConfig.formatConnection === 'DNSseedlist' && environment
 	}
 }
 
+// 679436987
+
 const db = mongoose.connection;
 db.on('error', (err) => {
 	logger.error(`Connection error with database. ${err}`);

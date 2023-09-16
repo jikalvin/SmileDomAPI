@@ -1,11 +1,11 @@
 /**
- * All resolvers related to users
+ * All resolvers related to patients
  * @typedef {Object}
  */
 export default {
 	Query: {
 		/**
-		 * It allows to administrators users to list all users registered
+		 * It allows to administrators users to list all patients registered
 		 */
 		listAllPatients:  async (parent, args, context) => {
 			context.di.authValidation.ensureThatUserIsLogged(context);
