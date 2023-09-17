@@ -15,7 +15,7 @@ const AppointmentsSchema = new Schema({
 		required: true,
 	},
 	appointmentTime: {
-		type: Time,
+		type: Date,
 		required: true,
 	},
 	status: {
@@ -39,6 +39,8 @@ const AppointmentsSchema = new Schema({
 		unique: true,
 		default: randomUUID
 	},
+},{
+	timestamps: true
 });
 
 export { AppointmentsSchema };
