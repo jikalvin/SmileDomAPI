@@ -23,6 +23,9 @@ const UsersSchema = new Schema({
 		unique: true,
 		trim: true,
 	},
+	verificationCode: {
+		type: String
+	},
 	password: {
 		type: String,
 		required: true

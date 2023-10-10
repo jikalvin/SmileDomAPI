@@ -1,5 +1,10 @@
 import { UserInputError } from 'apollo-server-express';
 import bcrypt from 'bcrypt';
+import { environmentVariablesConfig } from '../../config/appConfig.js';
+
+import twilio from 'twilio';
+
+const client = twilio(environmentVariablesConfig.accountSid, environmentVariablesConfig.authToken);
 
 import { isValidEmail, isStrongPassword } from '../../helpers/validations.js';
 
@@ -119,6 +124,46 @@ export default {
 			const user = await context.di.authValidation.getUser(context);
 
 			return context.di.model.Users.deleteOne({ uuid: user.uuid });
+		},
+		sendVerificationCode: async (_, { phone }, context) => {
+			// Generate a random 6-digit code
+			const verificationCode = Math.floor(100000 + Math.random() * 900000);
+		
+			// Save the verification code to the user's record
+			const user = await context.di.model.Users.findOneAndUpdate(
+			  { phone },
+			  { verificationCode },
+			  { new: true }
+			);
+		
+			// Send the verification code via SMS using Twilio
+			try {
+			  await client.messages.create({
+				body: `Your verification code is ${verificationCode}`,
+				from: "+12563054784",
+				to: "+237671769301"
+			  });
+			  return true;
+			} catch (err) {
+			  console.error(err);
+			  return false;
+			}
+		},
+
+		verifyCode: async (_, { phone, code }, context) => {
+			// Find the user by phone number
+			const user = await context.di.model.Users.findOne({ phone });
+		
+			// Check if the user exists and the verification code matches
+			if (!user || user.verificationCode !== code) {
+			  throw new Error('Invalid verification code');
+			}
+		
+			await context.di.model.Users.findOneAndUpdate({ email }, { lastLogin: new Date().toISOString() }, { new: true }).lean();
+		
+			return {
+				token: context.di.jwt.createAuthToken(user.email, user.isAdmin, user.isActive, user.uuid)
+			};
 		}
 	}
 };

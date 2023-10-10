@@ -43,7 +43,9 @@ export const environmentVariablesConfig = Object.freeze({
 	mongoPass: process.env.MONGO_PASS || '',
 	environment: (process.env.ENVIRONMENT === ENVIRONMENT.DEVELOPMENT) ? ENVIRONMENT.DEVELOPMENT : ENVIRONMENT.PRODUCTION,
 	port: Number(process.env.PORT) || serverPortByDefault,
-	dbURI: process.env.MONGODB_URI
+	dbURI: process.env.MONGODB_URI,
+	accountSid: process.env.TWILIO_ACCOUNT_SID,
+	authToken: process.env.TWILIO_AUTH_TOKEN,
 });
 
 /**

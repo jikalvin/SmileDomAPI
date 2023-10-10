@@ -14,5 +14,9 @@ export default /* GraphQL */ gql`
 
 		""" It allows to user to delete their account permanently """
 		deleteMyUserAccount: DeleteResult
+
+		sendVerificationCode(phoneNumber: String!): Boolean
+
+		verifyCode(phoneNumber: String!, code: String!): Token
 	}
 `;
