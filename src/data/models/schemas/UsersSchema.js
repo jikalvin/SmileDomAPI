@@ -28,7 +28,11 @@ const UsersSchema = new Schema({
 	},
 	password: {
 		type: String,
-		required: true
+		// required: true
+	},
+	image: {
+		type: String,
+		// required: true
 	},
 	isAdmin: {
 		type: Boolean,
@@ -60,7 +64,19 @@ const UsersSchema = new Schema({
 		type: Date,
 		required: true,
 		default: Date.now
-	}
+	},
+	friends: [
+		{
+		  type: mongoose.Schema.Types.ObjectId,
+		  ref: 'Users',
+		},
+	],
+	posts: [
+		{
+		  type: mongoose.Schema.Types.ObjectId,
+		  ref: 'Posts',
+		},
+	],
 });
 
 /**

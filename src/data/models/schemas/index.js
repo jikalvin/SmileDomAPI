@@ -3,6 +3,9 @@ import { PatientsSchema } from './PatientsSchema.js';
 import { DoctorsSchema } from './DoctorsSchema.js';
 import { MedicalHistorySchema } from './MedicalHistorySchema.js';
 import { MessagesSchema } from './MessagesSchema.js';
+import { PostsSchema } from './PostsSchema.js';
+import { LikesSchema } from './LikesShema.js';
+import { CommentsSchema } from './CommentsSchema.js';
 
 export { 
     UsersSchema, 
@@ -10,4 +13,7 @@ export {
     DoctorsSchema,
     MedicalHistorySchema,
     MessagesSchema,
+    PostsSchema,
+    LikesSchema,
+    CommentsSchema
 };

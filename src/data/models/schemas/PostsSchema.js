@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
-import { timeStamp } from 'console';
 
 const Schema = mongoose.Schema;
 
@@ -10,32 +9,40 @@ const Schema = mongoose.Schema;
  * @constructor Users model constructor
  * @classdesc User have interesting properties. Some of them are isAdmin (false by default), isActive (true by default. Useful for removing login permission to the registered users), uuid (random and unique token. Created to provided a random identifier token for every user different than _id native MongoDB value)
  */
-const MessagesSchema = new Schema({
-	content: {
-		type: String,
-		required: true,
-	},
-	suid: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-	ruid: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-	muid: {
+const PostsSchema = new Schema({
+	title: {
+        type: String,
+        required: true,
+    },
+    content: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+    },
+    puid: {
 		type: String,
 		required: true,
 		unique: true,
 		default: randomUUID
 	},
-},
-{
-    timestamps: true,
-}
+});
 
-);
 
-export { MessagesSchema };
+
+export { PostsSchema };
