@@ -43,7 +43,7 @@ export default {
                     image
                 }).save();
 			
-			return await context.di.model.Posts.find({puid: user.uuid}).lean();
+			return await context.di.model.Posts.findOne({title: title})
         },
         updatePost: async (parent, { puid, title, content }, context) => {
           return await context.di.model.Posts.findByIdAndUpdate(puid, { title, content }, { new: true });
@@ -57,13 +57,11 @@ export default {
 			
 			const user = await context.di.authValidation.getUser(context);
             
-            await new context.di.model.Likes(
+            return await new context.di.model.Likes(
                 { 
                     post: puid,
                     user: user.uuid,
                 }).save();
-			
-			return await context.di.model.Posts.find({puid: user.uuid}).lean();
         },
         deleteLike: async (parent, { id }, context) => {
           await context.di.model.Likes.findByIdAndDelete(id);

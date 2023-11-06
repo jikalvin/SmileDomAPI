@@ -40,7 +40,7 @@ export default /* GraphQL */ gql`
   }
 
   type Mutation {
-    createPost(title: String!, content: String!): Post
+    createPost(title: String!, content: String!, image: String!): Post
     updatePost(id: ID!, title: String!, content: String!): Post
     deletePost(id: ID!): Boolean
     createLike(postId: ID!, userId: ID!): Like
