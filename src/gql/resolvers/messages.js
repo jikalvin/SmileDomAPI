@@ -76,16 +76,16 @@ export default {
 	Mutation: {
 		sendMessage: async (parent, args, context) => {
 			context.di.authValidation.ensureThatUserIsLogged(context);
-			const sender = context.di.model.Users.findById(args.senderId)
-			const receiver = context.di.model.Users.findById(args.receiverId)
-			console.log(sender.email, receiver.email)
+			const sender = await context.di.model.Users.findOne({uuid: args.senderId})
+			const receiver = await context.di.model.Users.findOne({uuid: args.receiverId})
+			console.log(sender.id, receiver.id)
 
 
 			return await new context.di.model.Messages(
 				{
 					message: args.message,
-					sender: mongoose.Types.ObjectId(sender._id),
-					receiver: mongoose.Types.ObjectId(receiver._id)
+					sender: mongoose.Types.ObjectId(sender.id),
+					receiver: mongoose.Types.ObjectId(receiver.id)
 				}).save();
 		},
 		makeCall: async (parent, args, context) => {
