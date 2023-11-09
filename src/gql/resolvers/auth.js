@@ -44,7 +44,12 @@ export default {
 			}
 			let isAnPhoneAlreadyRegistered = null;
 			if(phone){
-				isAnEmailAlreadyRegistered = await context.di.model.Users.findOne({ phone }).lean();
+				let user = await context.di.model.Users.findOne({ phone }).lean();
+				console.log(user)
+
+				if(user === null){
+					isAnPhoneAlreadyRegistered = null
+				}
 			}
 
 			if (isAnEmailAlreadyRegistered) {

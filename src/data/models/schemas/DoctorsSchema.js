@@ -29,6 +29,11 @@ const DoctorsSchema = new Schema({
 		type: String,
 		required: false
 	},
+	lastLogin: {
+		type: Date,
+		required: true,
+		default: Date.now
+	},
 	uuid: {
 		type: String,
 		required: true,

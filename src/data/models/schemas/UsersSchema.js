@@ -20,7 +20,6 @@ const UsersSchema = new Schema({
 	phone: {
 		type: String,
 		required: false,
-		unique: true,
 		trim: true,
 	},
 	verificationCode: {

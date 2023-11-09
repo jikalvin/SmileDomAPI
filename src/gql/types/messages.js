@@ -1,25 +1,45 @@
 import { gql } from 'apollo-server-express';
 
 export default /* GraphQL */ gql`
-	type Message {
-		content: String!
-		suid: String!
-		ruid: String!
+	type User {
+		id: ID!
+		email: String
+		phone: String
+		isAdmin: Boolean
+		isActive: Boolean
+		isDoctor: Boolean
+		uuid: String
+		registrationDate: String
+		lastLogin: String
 	}
 
-    input messageInfo {
-        content: String!
-		ruid: String!
-    }
+	type ChatMessage {
+		id: ID!
+		sender: User!
+		receiver: User!
+		message: String!
+		timestamp: String!
+	}
+
+	type Call {
+		id: ID!
+		caller: User!
+		receiver: User!
+		callType: String!
+		startTime: String!
+		endTime: String
+	}
 
 	type Query {
-		""" Get list of all patients """
-		listAllMessages: [Message]
-        getUserMessages: [Message]
+		getUser(uuid: String!): User
+		getChatMessages(senderId: String!, receiverId: String!): [ChatMessage]
+		getCalls(userId: String!): [Call]
+		getAllChats: [ChatMessage]
 	}
 
 	type Mutation {
-		""" It allows to create message """
-		createMessage(input: messageInfo!): Message
+		sendMessage(senderId: String!, receiverId: String!, message: String!): ChatMessage
+		makeCall(callerId: String!, receiverId: String!, callType: String!): Call
+		endCall(callId: String!): Call
 	}
 `;

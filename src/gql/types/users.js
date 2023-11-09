@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default /* GraphQL */ gql`
 	type User {
+		id: ID!
 		email: String
 		phone: String
 		isAdmin: Boolean

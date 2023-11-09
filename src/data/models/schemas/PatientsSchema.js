@@ -13,7 +13,6 @@ const PatientsSchema = new Schema({
 	fullName: {
 		type: String,
 		required: false,
-		unique: true,
 		lowercase: true
 	},
 	gender: {

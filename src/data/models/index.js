@@ -8,7 +8,8 @@ import {
 	MessagesSchema,
 	PostsSchema,
 	CommentsSchema,
-	LikesSchema
+	LikesSchema,
+	CallsSchema
 } from './schemas/index.js';
 
 export const models = {
@@ -20,4 +21,5 @@ export const models = {
 	Posts: mongoose.model('posts', PostsSchema),
 	Comments: mongoose.model('comments', CommentsSchema),
 	Likes: mongoose.model('likes', LikesSchema),
+	Calls: mongoose.model('calls', CallsSchema),
 };

@@ -6,6 +6,7 @@ import { MessagesSchema } from './MessagesSchema.js';
 import { PostsSchema } from './PostsSchema.js';
 import { LikesSchema } from './LikesShema.js';
 import { CommentsSchema } from './CommentsSchema.js';
+import { CallsSchema } from './CallsSchema.js';
 
 export { 
     UsersSchema, 
@@ -15,5 +16,6 @@ export {
     MessagesSchema,
     PostsSchema,
     LikesSchema,
-    CommentsSchema
+    CommentsSchema,
+    CallsSchema
 };

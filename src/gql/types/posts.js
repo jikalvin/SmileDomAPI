@@ -15,6 +15,7 @@ export default /* GraphQL */ gql`
     image: String!
     createdAt: String!
     updatedAt: String!
+    puid: String
   }
 
   type Like {
@@ -33,9 +34,9 @@ export default /* GraphQL */ gql`
   }
 
   type Query {
-    getPost(id: ID!): Post
+    getPost(puid: String!): Post
     getAllPosts: [Post]
-    getLikes(postId: ID!): [Like]
+    getLikes(puid: String!): [Like]
     getComments(postId: ID!): [Comment]
   }
 
@@ -43,9 +44,9 @@ export default /* GraphQL */ gql`
     createPost(title: String!, content: String!, image: String!): Post
     updatePost(id: ID!, title: String!, content: String!): Post
     deletePost(id: ID!): Boolean
-    createLike(postId: ID!, userId: ID!): Like
+    createLike(puid: String!): Like
     deleteLike(id: ID!): Boolean
-    createComment(postId: ID!, userId: ID!, content: String!): Comment
+    createComment(puid: ID!, content: String!): Comment
     deleteComment(id: ID!): Boolean
   }
 `;

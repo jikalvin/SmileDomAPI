@@ -22,10 +22,12 @@ const PostsSchema = new Schema({
         type: String,
         required: true,
     },
-    author: {
-        type: String,
-        required: true,
-    },
+    author: [
+		{
+		  type: mongoose.Schema.Types.ObjectId,
+		  ref: 'Users',
+		},
+	],
     createdAt: {
         type: Date,
         default: Date.now,
