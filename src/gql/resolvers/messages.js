@@ -21,7 +21,7 @@ export default {
 		},
 		receiver: async (parent, args, context) => {
 			try {
-				const user = await context.di.model.Users.findById(parent.receiver.toString());
+				const user = await context.di.model.Users.findById(parent.receiver);
 				if (!user) {
 					throw new Error('user not found');
 				}
@@ -90,11 +90,14 @@ export default {
 		},
 		makeCall: async (parent, args, context) => {
 			context.di.authValidation.ensureThatUserIsLogged(context);
+			const caller = await context.di.model.Users.findOne({uuid: args.callerId})
+			const receiver = await context.di.model.Users.findOne({uuid: args.receiverId})
+
 			return await new context.di.model.Calls(
 				{
 					callType: args.callType,
-					caller: mongoose.Types.ObjectId(args.callerId),
-					receiver: mongoose.Types.ObjectId(args.receiverId),
+					caller: mongoose.Types.ObjectId(caller.id),
+					receiver: mongoose.Types.ObjectId(receiver.id),
 				}).save();
 		},
 		endCall: async (parent, args, context) => {
