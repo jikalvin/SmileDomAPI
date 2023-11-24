@@ -10,13 +10,12 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node .",
     "dev": "nodemon .",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watchAll",
     "lint": "eslint --ext .js .",
     "clean": "rimraf logs",
-    "prepare": "husky install",
     "prebuild": "rimraf dist && mkdir dist",
     "build": "babel src -d dist"
   },
