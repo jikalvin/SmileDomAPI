@@ -10,45 +10,15 @@ const Schema = mongoose.Schema;
  * @classdesc User have interesting properties. Some of them are isAdmin (false by default), isActive (true by default. Useful for removing login permission to the registered users), uuid (random and unique token. Created to provided a random identifier token for every user different than _id native MongoDB value)
  */
 const MedicalHistorySchema = new Schema({
-	medicalCondition: [{
-		type: String,
-		required: false,
-	}],
-	allergies: [{
-		type: String,
-		required: false,
-	}],
-	medications: [{
-		type: String,
-		required: false,
-	}],
-	surgeries: [{
-		type: String,
-		required: false,
-	}],
-	weight: {
-		type: String,
-		required: false,
-	},
-	height: {
-		type: String,
-		required: false
-	},
-	bloodType: {
-		type: String,
-		required: false
-	},
-	uuid: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-	huid: {
-		type: String,
-		required: true,
-		unique: true,
-		default: randomUUID
-	},
+	patientId: {
+		type: Schema.Types.ObjectId,
+		ref: 'Patients',
+		required: true
+	  },
+	  consultations: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Consultations'
+	  }]
 });
 
 export { MedicalHistorySchema };

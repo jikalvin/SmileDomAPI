@@ -7,6 +7,7 @@ import { PostsSchema } from './PostsSchema.js';
 import { LikesSchema } from './LikesShema.js';
 import { CommentsSchema } from './CommentsSchema.js';
 import { CallsSchema } from './CallsSchema.js';
+import { ConsultationsSchema } from './ConsultationsSchema.js';
 
 export { 
     UsersSchema, 
@@ -17,5 +18,6 @@ export {
     PostsSchema,
     LikesSchema,
     CommentsSchema,
-    CallsSchema
+    CallsSchema,
+    ConsultationsSchema
 };

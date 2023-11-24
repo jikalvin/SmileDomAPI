@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 
 import { 
 	DoctorsSchema, 
@@ -9,7 +9,8 @@ import {
 	PostsSchema,
 	CommentsSchema,
 	LikesSchema,
-	CallsSchema
+	CallsSchema,
+	ConsultationsSchema
 } from './schemas/index.js';
 
 export const models = {
@@ -22,4 +23,5 @@ export const models = {
 	Comments: mongoose.model('comments', CommentsSchema),
 	Likes: mongoose.model('likes', LikesSchema),
 	Calls: mongoose.model('calls', CallsSchema),
+	Consultations: mongoose.model('consultations', ConsultationsSchema),
 };

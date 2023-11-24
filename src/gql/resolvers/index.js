@@ -7,6 +7,7 @@ import doctors from './doctors.js';
 import history from './history.js';
 import messages from './messages.js';
 import posts from './posts.js';
+import consultation from './consultation.js';
 
 export const resolvers = merge(
 	users,
@@ -15,5 +16,6 @@ export const resolvers = merge(
 	doctors,
 	history,
 	messages,
-	posts
+	posts,
+	consultation
 );

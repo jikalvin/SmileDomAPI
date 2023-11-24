@@ -2,7 +2,10 @@
  * All resolvers related to users
  * @typedef {Object}
  */
+// import { GraphQLUpload } from "graphql-upload";
+
 export default {
+	// Upload: GraphQLUpload,
 	Query: {
 		/**
 		 * It allows to administrators users to list all users registered
@@ -17,7 +20,7 @@ export default {
 		}
 	},
 	Mutation: {
-		updateUserInfo: async (parent, {email, isAdmin, isActive, isDoctor}, context) => {
+		updateUserInfo: async (parent, {email, isAdmin, isActive, isDoctor, image}, context) => {
 			
 			context.di.authValidation.ensureThatUserIsLogged(context);
 			
@@ -25,6 +28,9 @@ export default {
 			
 			if (isAdmin) {
 				await context.di.model.Users.findOneAndUpdate( { uuid: user.uuid }, { $set: { isAdmin: isAdmin } }, { returnOriginal: false } );
+			}
+			if (image) {
+				await context.di.model.Users.findOneAndUpdate( { uuid: user.uuid }, { $set: { image: image } }, { returnOriginal: false } );
 			}
 			if (isDoctor) {
 				await context.di.model.Users.findOneAndUpdate( { uuid: user.uuid }, { $set: { isDoctor: isDoctor } }, { returnOriginal: false } );

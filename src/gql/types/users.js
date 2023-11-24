@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server-express';
 
 export default /* GraphQL */ gql`
+	scalar Upload
+	
 	type User {
 		id: ID!
 		email: String

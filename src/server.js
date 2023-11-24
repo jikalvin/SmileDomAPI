@@ -19,6 +19,8 @@ import { resolvers } from './gql/resolvers/index.js';
 import { getListOfIPV4Address } from './helpers/getListOfIPV4Address.js';
 import routesManager from './routes/routesManager.js';
 
+// const {graphqlUploadExpress} = require("graphql-upload")
+
 
 mongoose.set('strictQuery', true);
 
@@ -71,6 +73,7 @@ const initApplication = async () => {
 		app.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
 	}
 	app.use(cors({ credentials: true }));
+	// app.use(graphqlUploadExpress())
 	const __dirname = path.dirname(fileURLToPath(import.meta.url));
 	app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 	app.use('', routesManager);
