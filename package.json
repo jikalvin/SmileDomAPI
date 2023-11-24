@@ -14,7 +14,6 @@
     "test:watch": "node --experimental-vm-modules node_modules/.bin/jest --watchAll",
     "lint": "eslint --ext .js .",
     "clean": "rimraf logs",
-    "prepare": "husky install",
     "prebuild": "rimraf dist && mkdir dist",
     "build": "babel src -d dist"
   },
