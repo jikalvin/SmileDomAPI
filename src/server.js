@@ -113,6 +113,7 @@ const initApplication = async () => {
 	});
 
 	// Manage application shutdown
+	// manage
 	process.on('SIGINT', () => {
 		logger.info('Stopping application...');
 		endLogger();
