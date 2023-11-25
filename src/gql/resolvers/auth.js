@@ -53,10 +53,10 @@ export default {
 			}
 
 			if (isAnEmailAlreadyRegistered) {
-				throw new UserInputError('Data provided is not valid');
+				throw new UserInputError('Email is already in use');
 			}
 			if (isAnPhoneAlreadyRegistered) {
-				throw new UserInputError('Data provided is not valid');
+				throw new UserInputError('Phone number is already in use');
 			}
 
 			if (email){
