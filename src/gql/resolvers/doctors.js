@@ -10,7 +10,7 @@ export default {
 		listAllDoctors:  async (parent, args, context) => {
 			context.di.authValidation.ensureThatUserIsLogged(context);
 
-			context.di.authValidation.ensureThatUserIsAdministrator(context);
+			// context.di.authValidation.ensureThatUserIsAdministrator(context);
 
 			// const sortCriteria = { isAdmin: 'desc', registrationDate: 'asc' };
 			return context.di.model.Doctors.find().lean();
