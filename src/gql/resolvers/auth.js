@@ -2,9 +2,9 @@ import { UserInputError } from 'apollo-server-express';
 import bcrypt from 'bcrypt';
 import { environmentVariablesConfig } from '../../config/appConfig.js';
 
-import twilio from 'twilio';
+// import twilio from 'twilio';
 
-const client = twilio(environmentVariablesConfig.accountSid, environmentVariablesConfig.authToken);
+// const client = twilio(environmentVariablesConfig.accountSid, environmentVariablesConfig.authToken);
 
 import { isValidEmail, isStrongPassword } from '../../helpers/validations.js';
 
@@ -142,17 +142,17 @@ export default {
 			);
 		
 			// Send the verification code via SMS using Twilio
-			try {
-			  await client.messages.create({
-				body: `Your verification code is ${verificationCode}`,
-				from: "+12563054784",
-				to: "+237671769301"
-			  });
-			  return true;
-			} catch (err) {
-			  console.error(err);
-			  return false;
-			}
+			// try {
+			//   await client.messages.create({
+			// 	body: `Your verification code is ${verificationCode}`,
+			// 	from: "+12563054784",
+			// 	to: "+237671769301"
+			//   });
+			//   return true;
+			// } catch (err) {
+			//   console.error(err);
+			//   return false;
+			// }
 		},
 
 		verifyCode: async (_, { phone, code }, context) => {
