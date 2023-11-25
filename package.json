@@ -3,11 +3,6 @@
   "version": "2.0.3",
   "description": "smiledom",
   "main": "src/server.js",
-  "engines": {
-    "node": "16.16.0",
-    "npm": "8.11.0",
-    "yarn": "1.22.19"
-  },
   "type": "module",
   "scripts": {
     "start": "node src/server.js",
