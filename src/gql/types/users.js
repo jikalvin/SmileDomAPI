@@ -23,5 +23,7 @@ export default /* GraphQL */ gql`
 	type Mutation {
 		""" It allows to update user info """
 		updateUserInfo(email: String, isAdmin: Boolean, isActive: Boolean, isDoctor: Boolean): User
+		makeAdmin(email: String!): User!
+		makeDoctor(email: String!): User!
 	}
 `;

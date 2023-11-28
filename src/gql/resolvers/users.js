@@ -46,5 +46,17 @@ export default {
 			
 			return user;
 		},
+		makeAdmin: async (parent, {email}, context) => {
+			
+			context.di.authValidation.ensureThatUserIsLogged(context);
+			
+			return await context.di.model.Users.findOneAndUpdate( { email }, { $set: { isAdmin: true } }, { returnOriginal: false } );
+		},
+		makeDoctor: async (parent, {email}, context) => {
+			
+			context.di.authValidation.ensureThatUserIsLogged(context);
+			
+			return await context.di.model.Users.findOneAndUpdate( { email }, { $set: { isDoctor: true } }, { returnOriginal: false } );
+		},
 	}
 };
