@@ -66,16 +66,25 @@ const UsersSchema = new Schema({
 	},
 	friends: [
 		{
-		  type: mongoose.Schema.Types.ObjectId,
-		  ref: 'Users',
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Users',
 		},
 	],
 	posts: [
 		{
-		  type: mongoose.Schema.Types.ObjectId,
-		  ref: 'Posts',
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Posts',
 		},
 	],
+	duration: {
+		type: String,
+		enum: ['free', 'monthly', '3 months', 'yearly'],
+		default: 'free'
+	},
+	expiresAt: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 /**

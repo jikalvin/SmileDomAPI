@@ -13,11 +13,20 @@ export default /* GraphQL */ gql`
 		uuid: String
 		registrationDate: String
 		lastLogin: String
+		image: String
+		duration: String!
+		expiresAt: String!
+	}
+
+	type SubscriptionPlan {
+		email: String!
+		duration: String!
 	}
 
 	type Query {
 		""" Get list of all users registered on database """
 		listAllUsers: [User]
+		subscriptionPlans: [SubscriptionPlan!]!
 	}
 
 	type Mutation {
@@ -25,5 +34,6 @@ export default /* GraphQL */ gql`
 		updateUserInfo(email: String, isAdmin: Boolean, isActive: Boolean, isDoctor: Boolean): User
 		makeAdmin(email: String!): User!
 		makeDoctor(email: String!): User!
+		createSubscriptionPlan(duration: String!, email: String!): SubscriptionPlan!
 	}
 `;
