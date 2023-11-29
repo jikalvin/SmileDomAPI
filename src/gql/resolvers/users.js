@@ -53,12 +53,22 @@ export default {
 		makeAdmin: async (parent, { email }, context) => {
 
 			context.di.authValidation.ensureThatUserIsLogged(context);
+			const user = await context.di.model.Users.findOne({ email });
+
+			if (!user) {
+				throw new UserInputError('User not found or login not allowed');
+			}
 
 			return await context.di.model.Users.findOneAndUpdate({ email }, { $set: { isAdmin: true } }, { returnOriginal: false });
 		},
 		makeDoctor: async (parent, { email }, context) => {
 
 			context.di.authValidation.ensureThatUserIsLogged(context);
+			const user = await context.di.model.Users.findOne({ email });
+
+			if (!user) {
+				throw new UserInputError('User not found or login not allowed');
+			}
 
 			return await context.di.model.Users.findOneAndUpdate({ email }, { $set: { isDoctor: true } }, { returnOriginal: false });
 		},
@@ -68,6 +78,10 @@ export default {
 			context.di.authValidation.ensureThatUserIsAdministrator(context);
 
 			const user = await context.di.model.Users.findOne({ email });
+
+			if (!user) {
+				throw new UserInputError('User not found or login not allowed');
+			}
 
 			if (duration !== 'free') {
 				const currentDate = new Date();
