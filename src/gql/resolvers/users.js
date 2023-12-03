@@ -102,5 +102,16 @@ export default {
 
 			return await context.di.model.Users.findOne({ email });
 		},
+		deleteUser: async (parent, { email }, context) => {
+			context.di.authValidation.ensureThatUserIsLogged(context);
+			context.di.authValidation.ensureThatUserIsAdministrator(context);
+
+			try {
+				const user = await context.di.model.Users.findOne({ email })
+				return await context.di.model.Users.findByIdAndDelete(user.id);
+			} catch (error) {
+				throw new Error('Failed to delete user');
+			}
+		},
 	}
 };

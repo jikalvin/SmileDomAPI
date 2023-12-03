@@ -34,6 +34,7 @@ export default /* GraphQL */ gql`
 		updateUserInfo(email: String, isAdmin: Boolean, isActive: Boolean, isDoctor: Boolean): User
 		makeAdmin(email: String!): User!
 		makeDoctor(email: String!): User!
+		deleteUser(email: String!): User
 		createSubscriptionPlan(duration: String!, email: String!): SubscriptionPlan!
 	}
 `;
